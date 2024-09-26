@@ -2,7 +2,7 @@
 import pygame
 
 from constants import *
-
+from player import *
 
 
 def main():
@@ -19,6 +19,10 @@ def main():
     delta_time = 0  # time passed since last frame was drawn
     desired_max_frame_rate = 60
 
+    # Player sprite at the center of the screen
+    # See player.py
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
     # Game loop
     while (True):
 
@@ -28,7 +32,13 @@ def main():
             if (event.type == pygame.QUIT):
                 return
 
+        # Black screen
         screen.fill(pygame.Color(0, 0, 0))
+
+        # Player
+        player.draw(screen)
+
+        # Update display
         pygame.display.flip()
         delta_time = game_clock.tick(desired_max_frame_rate)
 
