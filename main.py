@@ -36,6 +36,7 @@ def main():
         screen.fill(pygame.Color(0, 0, 0))
 
         # Player
+        player.update(delta_time)
         player.draw(screen)
 
         # Update display
