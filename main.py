@@ -13,6 +13,12 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # Limit the game to 60 FPS
+    # https://www.pygame.org/docs/ref/time.html#pygame.time.Clock.tick
+    game_clock = pygame.time.Clock()
+    delta_time = 0  # time passed since last frame was drawn
+    desired_max_frame_rate = 60
+
     # Game loop
     while (True):
 
@@ -24,6 +30,7 @@ def main():
 
         screen.fill(pygame.Color(0, 0, 0))
         pygame.display.flip()
+        delta_time = game_clock.tick(desired_max_frame_rate)
 
 # Keep at bottom of file
 # This line ensures the main() function is only called when this file is run directly; 
