@@ -17,7 +17,6 @@ def main():
     # https://www.pygame.org/docs/ref/time.html#pygame.time.Clock.tick
     game_clock = pygame.time.Clock()
     delta_time = 0  # time passed since last frame was drawn
-    desired_max_frame_rate = 60
 
     # Player sprite at the center of the screen
     # See player.py
@@ -41,7 +40,9 @@ def main():
 
         # Update display
         pygame.display.flip()
-        delta_time = game_clock.tick(desired_max_frame_rate)
+
+        # Limit to 60 FPS
+        delta_time = game_clock.tick(60) / 1000
 
 # Keep at bottom of file
 # This line ensures the main() function is only called when this file is run directly; 
