@@ -56,7 +56,7 @@ def main():
             # Destory asteroids and bullets that collide
             for bullet in bullets:
                 if (bullet.collision(asteroid)):
-                    asteroid.kill()
+                    asteroid.split()
                     bullet.kill()
         
 
