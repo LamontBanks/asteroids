@@ -12,5 +12,5 @@ class Asteroid(CircleShape):
 
     def update(self, delta_time):
         forward = pygame.Vector2(0, 1)
-        self.position += forward * 10 * delta_time
+        self.position += forward * 100 * delta_time
 

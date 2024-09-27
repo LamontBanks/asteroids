@@ -46,6 +46,12 @@ def main():
             obj.update(delta_time)
         # Can't use updatable.update() ?
 
+        # Exit if the player has collided with any asteroids
+        for asteroid in asteroids:
+            if (asteroid.collision(player)):
+                print("Game Over!")
+                return
+
         # Black screen
         screen.fill(pygame.Color(0, 0, 0))
 
