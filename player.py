@@ -9,6 +9,7 @@ class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.player_shoot_cooldown_timer = 0
 
     # Override from CircleShare
     def draw(self, screen):
@@ -29,6 +30,12 @@ class Player(CircleShape):
     def update(self, delta_time):
         keys = pygame.key.get_pressed()
 
+        if (self.player_shoot_cooldown_timer > 0):
+            self.player_shoot_cooldown_timer -= delta_time
+        # Ensure cooldown timer stays non-negative
+        if (self.player_shoot_cooldown_timer < 0):
+            self.player_shoot_cooldown_timer = 0
+
         # Key: A - turn left
         if keys[pygame.K_a]:
             self.rotate(delta_time * -1)
@@ -43,7 +50,9 @@ class Player(CircleShape):
             self.move(delta_time * -1)
         # Key: Spacebar - shoot
         if keys[pygame.K_SPACE]:
-            self.shoot()
+            if (self.player_shoot_cooldown_timer == 0):
+                self.shoot()
+                self.player_shoot_cooldown_timer = PLAYER_SHOOT_COOLDOWN
 
     def rotate(self, delta_time):
         self.rotation += PLAYER_TURN_SPEED * delta_time
