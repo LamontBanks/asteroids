@@ -22,12 +22,12 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
-    shots = pygame.sprite.Group()
+    bullets = pygame.sprite.Group()
 
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
-    Shot.containers = (updatable, drawable)
+    Shot.containers = (bullets, updatable, drawable)
 
     # Create the player sprite at the center of the screen
     # See player.py
@@ -47,11 +47,18 @@ def main():
             obj.update(delta_time)
         # Can't use updatable.update() ?
 
-        # Exit if the player has collided with any asteroids
+        
         for asteroid in asteroids:
+            # Exit if the player has collided with any asteroids
             if (asteroid.collision(player)):
                 print("Game Over!")
                 return
+            # Destory asteroids and bullets that collide
+            for bullet in bullets:
+                if (bullet.collision(asteroid)):
+                    asteroid.kill()
+                    bullet.kill()
+        
 
         # Black screen
         screen.fill(pygame.Color(0, 0, 0))
