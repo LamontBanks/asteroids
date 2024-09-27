@@ -3,7 +3,7 @@ import pygame
 from circleshape import *
 from constants import *
 
-class Asteroid(CircleShape):
+class Shot(CircleShape):
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
 
@@ -11,5 +11,4 @@ class Asteroid(CircleShape):
         pygame.draw.circle(screen, 'white', self.position, self.radius, width=2)
 
     def update(self, delta_time):
-        forward = pygame.Vector2(0, 1)
-        self.position += forward * 100 * delta_time
+        self.position += self.velocity * delta_time

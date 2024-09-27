@@ -2,6 +2,7 @@ import pygame
 
 from circleshape import *
 from constants import *
+from shot import *
 
 class Player(CircleShape):
 
@@ -24,6 +25,7 @@ class Player(CircleShape):
 
         return [a, b, c]
     
+    # Update the position, rotation using the WASD keys
     def update(self, delta_time):
         keys = pygame.key.get_pressed()
 
@@ -39,6 +41,9 @@ class Player(CircleShape):
         # Key: S - move backwards to current direction
         if keys[pygame.K_s]:
             self.move(delta_time * -1)
+        # Key: Spacebar - shoot
+        if keys[pygame.K_SPACE]:
+            self.shoot()
 
     def rotate(self, delta_time):
         self.rotation += PLAYER_TURN_SPEED * delta_time
@@ -46,3 +51,7 @@ class Player(CircleShape):
     def move(self, delta_time):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         self.position += forward * PLAYER_SPEED * delta_time
+    
+    def shoot(self):
+        shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
+        shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation) * PLAYER_SHOOT_SPEED
