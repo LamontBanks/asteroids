@@ -33,6 +33,19 @@ class Player(CircleShape):
         # Key: D - turn right
         if keys[pygame.K_d]:
             self.rotate(delta_time)
+        # Key: W - move forward in current direction
+        if keys[pygame.K_w]:
+            self.move(delta_time)
+        # Key: S - move backwards to current direction
+        if keys[pygame.K_s]:
+            self.move(delta_time * -1)
+        
     
+
     def rotate(self, delta_time):
         self.rotation += PLAYER_TURN_SPEED * delta_time
+
+
+    def move(self, delta_time):
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        self.position += forward * PLAYER_SPEED * delta_time

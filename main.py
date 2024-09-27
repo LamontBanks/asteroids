@@ -27,7 +27,6 @@ def main():
 
         # Listen for the "close window" event to close the game
         for event in pygame.event.get():
-            print(event)
             if (event.type == pygame.QUIT):
                 return
 
